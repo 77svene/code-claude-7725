@@ -211,7 +211,7 @@ export function createTokenRefreshScheduler({
     logForDebugging(
       `[${label}:token] Refreshing token for sessionId=${sessionId}: new token prefix=${oauthToken.slice(0, 15)}…`,
     )
-    logEvent('tengu_bridge_token_refreshed', {})
+    /* telemetry scrubbed */
     onRefresh(sessionId, oauthToken)
 
     // Schedule a follow-up refresh so long-running sessions stay authenticated.

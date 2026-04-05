@@ -11,7 +11,7 @@
  */
 
 import type { ContentBlockParam } from '@anthropic-ai/sdk/resources/messages.mjs'
-import axios from 'axios'
+import { fetchClient as axios } from '../../utils/http'
 import { randomUUID } from 'crypto'
 import { mkdir, writeFile } from 'fs/promises'
 import { basename, join } from 'path'

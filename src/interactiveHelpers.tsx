@@ -187,14 +187,14 @@ export async function showSetupScreens(root: Root, permissionMode: PermissionMod
   // otelHeadersHelper (which requires trust to execute) are available.
   // Defer to next tick so the OTel dynamic import resolves after first render
   // instead of during the pre-render microtask queue.
-  setImmediate(() => initializeTelemetryAfterTrust());
+  setImmediate(() => undefined);
   if (await isQualifiedForGrove()) {
     const {
       GroveDialog
     } = await import('src/components/grove/Grove.js');
     const decision = await showSetupDialog<string>(root, done => <GroveDialog showIfAlreadyViewed={false} location={onboardingShown ? 'onboarding' : 'policy_update_modal'} onDone={done} />);
     if (decision === 'escape') {
-      logEvent('tengu_grove_policy_exited', {});
+      /* telemetry scrubbed */
       gracefulShutdownSync(0);
       return false;
     }
@@ -306,7 +306,7 @@ export function getRenderContext(exitOnCtrlC: boolean): {
 
   // Log analytics event when stdin override is active
   if (baseOptions.stdin) {
-    logEvent('tengu_stdin_interactive', {});
+    /* telemetry scrubbed */
   }
   const fpsTracker = new FpsTracker();
   const stats = createStatsStore();
@@ -351,11 +351,7 @@ export function getRenderContext(exitOnCtrlC: boolean): {
           }
           const now = Date.now();
           if (now - lastFlickerTime < 1000) {
-            logEvent('tengu_flicker', {
-              desiredHeight: flicker.desiredHeight,
-              actualHeight: flicker.availableHeight,
-              reason: flicker.reason
-            } as unknown as Record<string, boolean | number | undefined>);
+            /* telemetry scrubbed */
           }
           lastFlickerTime = now;
         }
