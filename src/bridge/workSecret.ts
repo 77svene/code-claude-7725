@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { fetchClient as axios } from '../../utils/http'
 import { jsonParse, jsonStringify } from '../utils/slowOperations.js'
 import type { WorkSecret } from './types.js'
 

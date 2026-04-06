@@ -190,9 +190,7 @@ export function handleIngressMessage(
 
     if (parsed.type === 'user') {
       if (uuid) recentInboundUUIDs.add(uuid)
-      logEvent('tengu_bridge_message_received', {
-        is_repl: true,
-      })
+      /* telemetry scrubbed */
       // Fire-and-forget — handler may be async (attachment resolution).
       void onInboundMessage?.(parsed)
     } else {

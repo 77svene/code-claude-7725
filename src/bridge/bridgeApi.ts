@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { fetchClient as axios } from '../../utils/http'
 
 import { debugBody, extractErrorDetail } from './debugUtils.js'
 import {
